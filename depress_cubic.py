@@ -1,5 +1,5 @@
 
-def modify(coefficients):
+def depressed_cubic(coefficients):
     mod = coefficients
     a_3 = mod[3]
     a_2 = 0
