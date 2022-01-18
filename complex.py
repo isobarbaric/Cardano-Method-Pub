@@ -17,6 +17,15 @@ class complex:
             else:
                 return math.sqrt(-1*value)
 
+    def __pow__(self, number):
+        if (number == 0):
+            return complex(1, 0)
+        else:
+            currentNumber = self
+            for i in range(number-1):
+                currentNumber *= self
+        return currentNumber
+
     # included before any other functions because used to initialize class object 
 
     def __init__(self, real, imaginary):
