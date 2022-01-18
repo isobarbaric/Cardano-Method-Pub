@@ -31,7 +31,7 @@ class complex:
     def __init__(self, real, imaginary):
         self.real = real
         self.imaginary = imaginary
-        self.absValue = self.squareRoot((self.real ** 2) + (self.imaginary ** 2))
+        self.absValue = self.squareRoot((self.real*self.real) + (self.imaginary*self.imaginary))
     
     def __add__(self, other):
         real_part = self.real + other.real
@@ -61,7 +61,7 @@ class complex:
 
     # using DeMoivre's Theorem, the cube root of a complex number can easily be computed 
     def cubeRoot(self): # meant for complex numbers so imaginary part may not be zero 
-        k = self.absValue # sin x = a/k, cos x = b/k
+        k = self.absValue  # sin x = a/k, cos x = b/k
         x = math.degrees(math.acos(self.real/k))
         # assertions to ensure that the correct number has been identified 
         assert math.isclose(math.cos(math.radians(x)), self.real/k)
