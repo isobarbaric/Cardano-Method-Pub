@@ -7,6 +7,9 @@ def quadratic(a, b, c):
     return [(complex(-1, 0)*b+(b*b-complex(4, 0)*a*c).squareRoot())/(complex(2, 0)*a), 
     (complex(-1, 0)*b-(b*b-complex(4, 0)*a*c).squareRoot())/(complex(2, 0)*a)]
 
+shift = complex(coefficients[2]/(3*coefficients[3]), 0)
+
+# this stuff should be calculated by the complex.py function and simply returned to this file 
 H = (coefficients[1]-(coefficients[2] ** 2)/(3*coefficients[3]))/3
 G = (2*(coefficients[2] ** 3))/(27*(coefficients[3] ** 2)) - (coefficients[1]*coefficients[2])/(3*coefficients[3]) + coefficients[0]
 
@@ -31,9 +34,9 @@ answers = []
 other = [first+second, complex.round(omega*first)+complex.round(omega_sq*second), complex.round(omega_sq*first)+complex.round(omega*second)]
 
 def mod(value):
-    return (value - complex(coefficients[2]/(3*coefficients[3]), 0))
+    return (value - shift)
 
-other = [mod(i) for i in other]
+rev = [mod(i) for i in other]
 
 for i in range(3):
-    print(other[i])
+    print(rev[i])

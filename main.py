@@ -7,8 +7,5 @@ coefficients = [int(i) for i in input("Enter the cubic polynomial's coefficients
 
 # mention real coefficients only 
 
-if (coefficients[2] != 0):
-    coefficients = depressed_cubic(coefficients)
-
-
-
+# if (coefficients[2] != 0):
+#     coefficients = depressed_cubic(coefficients)
