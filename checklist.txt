@@ -9,6 +9,7 @@ changes:
 - make display of real numbers (basically imaginary coefficient = 0) without the 'i' part 
 - main.py doesn't interface properly with other files
 - shift part is getting stuck because of future changes to the coefficients list; have commented out relevant part in main.py, hopefully making main.py interface with the rest of the files will make it a lot easier 
+- find a better name than "coefficients", its WAY too long 
 
 ideas:
 - turn into python package? 
