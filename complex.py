@@ -27,11 +27,14 @@ class complex:
 
     # included before any other functions because used to initialize class object 
 
-    def __init__(self, real, imaginary=0):
+    def __init__(self, real, imaginary=None):
         self.real = real
-        self.imaginary = imaginary
-        self.absValue = self.squareRoot((self.real*self.real) + (self.imaginary*self.imaginary))
-    
+        if imaginary is None:
+            self.imaginary = 0
+        else:
+            self.imaginary = imaginary
+        self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
+
     def __add__(self, other):
         real_part = self.real + other.real
         imaginary_part = self.imaginary + other.imaginary 
@@ -96,3 +99,4 @@ class complex:
         rev_real = r*math.cos(math.radians(x)) 
         rev_imaginary = r*math.sin(math.radians(x))
         return complex(rev_real, rev_imaginary)
+    

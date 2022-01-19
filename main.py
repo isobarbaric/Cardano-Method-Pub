@@ -4,15 +4,13 @@ from complex import *
 from cardano import *
 
 # list indices 'i' map directly to a_i notation 
-coefficients = [int(i) for i in input("Enter the cubic polynomial's coefficients in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.").split()]
-
-u, v = quadratic(complex(1), complex(1), complex(1))
-print(u, v)
+coeff = [int(i) for i in input("Enter the cubic polynomial's coefficients in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n").split()]
 
 # mention real coefficients only 
 
-coefficients, H, G, shift = depressed_cubic(coefficients)
+coeff, H, G, shift = depressed_cubic(coeff)
 
 answers = cardano_method(H, G, shift)
 
-print(answers)
+for root in answers:
+    print(root)
