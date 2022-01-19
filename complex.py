@@ -71,3 +71,8 @@ class complex:
         rev_real = r*math.cos(math.radians(x)) 
         rev_imaginary = r*math.sin(math.radians(x))
         return complex(rev_real, rev_imaginary)
+        
+    def round(self):
+        rev_real = round(self.real, 3)
+        rev_imaginary = round(self.imaginary, 3)
+        return complex(rev_real, rev_imaginary)

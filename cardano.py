@@ -7,31 +7,33 @@ def quadratic(a, b, c):
     return [(complex(-1, 0)*b+(b*b-complex(4, 0)*a*c).squareRoot())/(complex(2, 0)*a), 
     (complex(-1, 0)*b-(b*b-complex(4, 0)*a*c).squareRoot())/(complex(2, 0)*a)]
 
-# def raiseTo(base, exponent):
-#     ans = complex(1, 0)
-#     for i in range(exponent):
-#         ans *= base
-#     return ans
-
 H = (coefficients[1]-(coefficients[2] ** 2)/(3*coefficients[3]))/3
-G = (2*(coefficients[0] ** 3))/(27*(coefficients[3] ** 2)) - (coefficients[1]*coefficients[2])/(3*coefficients[3]) + coefficients[0]
+G = (2*(coefficients[2] ** 3))/(27*(coefficients[3] ** 2)) - (coefficients[1]*coefficients[2])/(3*coefficients[3]) + coefficients[0]
 
 # print(H, G)
 
-u, v = quadratic(complex(1, 0), complex(G, 0), complex(-(H ** 3), 0)) # u, v are data members of type complex
+# u, v are data members of type complex
+u, v = quadratic(complex(1, 0), complex(G, 0), complex(-(H ** 3), 0)) 
+# print(u, v)
 
-# u, v = quadratic(complex(1, 0), complex(2, 0), complex(9, 0)) 
-
-first = u.cubeRoot()
-second = complex(-H, 0)/u.cubeRoot()
+first = complex.round(u.cubeRoot())
+# print(first)
+second = complex.round(complex(-H, 0)/u.cubeRoot())
+# print(second)
 
 omega, omega_sq = quadratic(complex(1, 0), complex(1, 0), complex(1, 0))
 
 answers = []
 
-for i in range(3):
-    currentRoot = ((omega ** i))*(first) + (omega ** (3-i))*(second)
-    answers.append(currentRoot)
+# print(first, second)
+# print(omega*first, omega_sq*second)
+# print(omega_sq*first, omega*second)
+other = [first+second, complex.round(omega*first)+complex.round(omega_sq*second), complex.round(omega_sq*first)+complex.round(omega*second)]
+
+def mod(value):
+    return (value - complex(coefficients[2]/(3*coefficients[3]), 0))
+
+other = [mod(i) for i in other]
 
 for i in range(3):
-    print(answers[i])
+    print(other[i])
