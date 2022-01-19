@@ -1,12 +1,9 @@
 
 changes:
-- make round function more friendly by overloading the one in the math module (to make syntax better)
 - allow for real numbers to more easily operate with complex numbers by     
     1. allowing real numbers to automatically be interpreted as complex numbers 
     OR at least
     2. letting imaginary parameter be optional so that real numbers don't have to be initialized with a zero in the imaginary number's place
-- allow custom setting for number of digits of accuracy for the roots 
-- make display of real numbers (basically imaginary coefficient = 0) without the 'i' part 
 - main.py doesn't interface properly with other files
 - shift part is getting stuck because of future changes to the coefficients list; have commented out relevant part in main.py, hopefully making main.py interface with the rest of the files will make it a lot easier 
 - find a better name than "coefficients", its WAY too long 
@@ -15,3 +12,12 @@ ideas:
 - turn into python package? 
 - testing with generated data? (not all cubics seem to be working flawlessly atm)
 pip install cardano-solver? idk
+
+done list
+=========
+- make round function more friendly by overloading the one in the math module (to make syntax better)
+- allow custom setting for number of digits of accuracy for the roots 
+ABOVE 2 THINGS GO HAND IN HAND 
+
+    2. letting imaginary parameter be optional so that real numbers don't have to be initialized with a zero in the imaginary number's place
+- make display of real numbers (basically imaginary coefficient = 0) without the 'i' part 
