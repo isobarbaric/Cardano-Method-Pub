@@ -3,22 +3,27 @@ import math
 
 class complex:
 
-    def __pow__(self, number):
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return complex(self.real*other, self.imaginary*other)
+        else:
+            real_part = self.real*other.real - self.imaginary*other.imaginary
+            imaginary_part = self.real*other.imaginary + self.imaginary*other.real
+            return complex(real_part, imaginary_part)
+    
+    def __rmul__(self, other): 
+        # one integer*complex numbers will come to here since all other cases are dealt with by the __mul__ function
+        return self.__mul__(other)
+
+    def __pow__(self, number): # number > 0 
         if (number == 0):
             return complex(1, 0)
         else:
             currentNumber = self
             for i in range(number-1):
                 currentNumber *= self
+                # currentNumber = self * currentNumber
         return currentNumber
-
-    def __init__(self, real, imaginary=None):
-        self.real = real
-        if imaginary is None:
-            self.imaginary = 0
-        else:
-            self.imaginary = imaginary
-        self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
 
     def __add__(self, other):
         real_part = self.real + other.real
@@ -30,17 +35,13 @@ class complex:
         imaginary_part = self.imaginary - other.imaginary 
         return complex(real_part, imaginary_part)
 
-    def __mul__(self, other):
-        if type(other) is int:
-            return complex(self.real*other, self.imaginary*other)
+    def __init__(self, real, imaginary=None):
+        self.real = real
+        if imaginary is None:
+            self.imaginary = 0
         else:
-            real_part = self.real*other.real - self.imaginary*other.imaginary
-            imaginary_part = self.real*other.imaginary + self.imaginary*other.real
-            return complex(real_part, imaginary_part)
-    
-    def __rmul__(self, other): 
-        # one integer*complex numbers will come to here since all other cases are dealt with by the __mul__ function
-        return self.__mul__(other)
+            self.imaginary = imaginary
+        self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
 
     def __truediv__(self, other):
         numerator = self*complex(other.real, -1*other.imaginary)
@@ -60,7 +61,7 @@ class complex:
         rev_imaginary = round(self.imaginary, num_digits)
         return complex(rev_real, rev_imaginary)
 
-    def root(self, value=2):
+    def root(self, value=2.0):
         k = self.absValue  # sin x = a/k, cos x = b/k
         x = math.degrees(math.acos(self.real/k))
         # assertions to ensure that the correct number has been identified (assertions messing everything up)
@@ -71,4 +72,5 @@ class complex:
         rev_real = r*math.cos(math.radians(x)) 
         rev_imaginary = r*math.sin(math.radians(x))
         return complex(rev_real, rev_imaginary)
-    
+
+# root, pow
