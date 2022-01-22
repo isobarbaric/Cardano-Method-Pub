@@ -1,20 +1,15 @@
+from depress_cubic import *
+from complex import *
+from cardano import *
 
-import random 
-import json
+coeff = covid_graph()
+coeff.reverse()
 
-lower_limit = 1
-upper_limit = 750
+coeff, H, G, shift = depressed_cubic(coeff)
 
-num_tests = 10000
+print(coeff)
 
-tests = {}
+answers = cardano_method(H, G, shift)
 
-for i in range(num_tests): 
-    real_part = random.randint(lower_limit, upper_limit)
-    imaginary_part = random.randint(lower_limit, upper_limit)
-    a = complex(real_part, imaginary_part)
-    tests[str(a)] = str(a ** 3)
-
-with open('tests.txt', 'w') as db:
-    data = json.dumps(tests, indent = 4)
-    db.write(data)
+for root in answers:
+    print(root)
