@@ -3,6 +3,20 @@ import requests
 from datetime import date, timedelta
 import matplotlib.pyplot as plt
 
+#
+def PolyCoefficients(x, coeffs):
+    """ Returns a polynomial for ``x`` values for the ``coeffs`` provided.
+
+    The coefficients must be in ascending order (``x**0`` to ``x**o``).
+    """
+    o = len(coeffs)
+    print(f'# This is a polynomial of order {ord}.')
+    y = 0
+    for i in range(o):
+        y += coeffs[i]*x**i
+    return y
+#
+
 def covid_graph():
     reference_indices = []
     daily_totals = []
@@ -29,10 +43,21 @@ def covid_graph():
     model = np.poly1d(np.polyfit(reference_indices, daily_totals, 3))
     print(model)
     cf = [float(i) for i in model.c]
+    print("this is the model", cf)
 
-    # polyline = np.linspace(1, 60, 50)
-    # plt.scatter(reference_indices, daily_totals)
-    # plt.plot(polyline, model(polyline))
-    # plt.show()
+    #
+    polyline = np.linspace(1, 60, 50)
+    plt.scatter(reference_indices, daily_totals)
+    plt.plot(polyline, model(polyline))
+    plt.show()
+    #
+
+    # cf.reverse()
+    
+    #
+    x = np.linspace(0, 60, 50)
+    plt.plot(x, PolyCoefficients(x, cf))
+    plt.show()
+    #
 
     return cf
