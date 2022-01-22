@@ -1,16 +1,20 @@
 
-from depress_cubic import *
-from complex import *
-from cardano import *
+import random 
+import json
 
-# list indices 'i' map directly to a_i notation 
-coeff = [int(i) for i in input("Enter the cubic polynomial's coefficients in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n").split()]
+lower_limit = 1
+upper_limit = 750
 
-# mention real coefficients only 
+num_tests = 10000
 
-coeff, H, G, shift = depressed_cubic(coeff)
+tests = {}
 
-answers = cardano_method(H, G, shift)
+for i in range(num_tests): 
+    real_part = random.randint(lower_limit, upper_limit)
+    imaginary_part = random.randint(lower_limit, upper_limit)
+    a = complex(real_part, imaginary_part)
+    tests[str(a)] = str(a ** 3)
 
-for root in answers:
-    print(root)
+with open('tests.txt', 'w') as db:
+    data = json.dumps(tests, indent = 4)
+    db.write(data)
