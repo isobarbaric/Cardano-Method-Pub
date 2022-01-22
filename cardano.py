@@ -13,4 +13,3 @@ def cardano_method(H, G, shift):
     withoutShift = [first+second, omega*first+omega_sq*second, omega_sq*first+omega*second]
     answers = [round(i-Complex(shift)) for i in withoutShift]
     return answers 
-

@@ -54,25 +54,5 @@ for i in range(num_datasets):
     print(f'{end_local-start_local} seconds elapsed...')
     print()
 end = time.time()
+
 print(f'{end-start} seconds were taken to run {num_datasets*10000} total tests. The success rate at obtaining the correct roots with 4 decimal places was {(1-(total_faults/(num_datasets*10000)))*100}%.')
-
-# coeff = covid_graph()
-# print(coeff)
-# print(np.roots(coeff[::-1]))
-# coeff, H, G, shift = depressed_cubic(coeff[::-1])
-# print(coeff, H, G, shift)
-
-# # test.reverse()
-# # print(test[::-1]) # 
-
-# #
-# x = np.linspace(0, 60, 50)
-# plt.plot(x, PolyCoefficients(x, coeff)) 
-# # plt.xticks(np.arange(min(x), max(x)+1, 1.0))
-# plt.show()
-# #
-
-# answers = cardano_method(H, G, shift)
-
-# for root in answers:
-#     print(root)

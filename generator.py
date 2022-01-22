@@ -1,6 +1,5 @@
 
 import random 
-import json
 
 lower_limit = 1
 upper_limit = 10
@@ -15,8 +14,6 @@ def generate_data():
         for i in range(4):
             coeff.append(random.randint(lower_limit, upper_limit))
         tests.append(coeff)
-
-    # use numpy in main.py
 
     with open('tests.txt', 'w') as db:
         for data in tests:
