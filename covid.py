@@ -30,9 +30,9 @@ def covid_graph():
     print(model)
     cf = [float(i) for i in model.c]
 
-    # polyline = np.linspace(1, 60, 50)
-    # plt.scatter(reference_indices, daily_totals)
-    # plt.plot(polyline, model(polyline))
-    # plt.show()
+    polyline = np.linspace(1, 60, 50)
+    plt.scatter(reference_indices, daily_totals)
+    plt.plot(polyline, model(polyline))
+    plt.show()
 
     return cf
