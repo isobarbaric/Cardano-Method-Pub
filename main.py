@@ -55,4 +55,4 @@ for i in range(num_datasets):
     print()
 end = time.time()
 
-print(f'{end-start} seconds were taken to run {num_datasets*10000} total tests. The success rate at obtaining the correct roots with 4 decimal places was {(1-(total_faults/(num_datasets*10000)))*100}%.')
+print(f'{end-start} seconds were taken to run {num_datasets*10000} total tests. The success rate at obtaining the correct roots with 4 decimal places was {(1-(total_faults/(num_datasets*10000)))*100}%. Maximum observed difference between actual roots and computed roots was {maxi_difference}')
