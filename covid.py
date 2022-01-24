@@ -23,13 +23,12 @@ def covid_graph():
         reference_indices.append(i)
 
     # polynomial fit with degree = 3
-    model = np.poly1d(np.polyfit(reference_indices, daily_totals, 3))
-    print(model)
-    cf = [float(i) for i in model.c]
+    best_fit = np.poly1d(np.polyfit(reference_indices, daily_totals, 3))
+    cf = [float(i) for i in best_fit.c]
 
     polyline = np.linspace(1, 60, 50)
     plt.scatter(reference_indices, daily_totals)
-    plt.plot(polyline, model(polyline))
+    plt.plot(polyline, best_fit(polyline))
     plt.show()
 
     return cf
