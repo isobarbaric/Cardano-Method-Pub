@@ -7,7 +7,7 @@ from cardano import *
 root = Tk() 
 root.title('Cardano\'s Method')
 
-input_field = Entry(root, width=65)
+input_field = Entry(root)
 input_field.pack() 
 
 label_rn = Label(root, text="Enter the cubic polynomial's coefficients in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n")
