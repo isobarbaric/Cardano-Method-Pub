@@ -1,9 +1,8 @@
+
+from tkinter import *
 from depress_cubic import *
 from complex import *
 from cardano import *
-
-# list indices 'i' map directly to a_i notation 
-coeff = [int(i) for i in input("Enter the cubic polynomial's coefficients in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n").split()]
 
 root = Tk() 
 root.title('Cardano\'s Method')
@@ -23,6 +22,7 @@ coeff = []
 def when_clicked():
     global num_attempts, coeff
     try:
+        # list indices 'i' map directly to a_i notation 
         coeff = [int(i) for i in input_field.get().split()]
         response.config(text = "Input processed succesfully...please standby")
         root.destroy()
