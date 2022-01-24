@@ -22,9 +22,6 @@ def covid_graph():
     for i in range(1, len(daily_totals)+1):
         reference_indices.append(i)
 
-    for i in range(len(daily_totals)):
-        print(reference_indices[i], daily_totals[i])
-
     # polynomial fit with degree = 3
     model = np.poly1d(np.polyfit(reference_indices, daily_totals, 3))
     print(model)
