@@ -7,7 +7,7 @@ def covid_graph():
     reference_indices = []
     daily_totals = []
 
-    start_date = date(2021, 11, 29)
+    start_date = date(2021, 11, 26)
     end_date = date.today()
     delta = timedelta(days=1)
     html_file = requests.get('https://health-infobase.canada.ca/src/data/covidLive/covid19.json').json()
