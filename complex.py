@@ -1,3 +1,4 @@
+  
 
 import math
 
@@ -43,6 +44,12 @@ class Complex:
             self.imaginary = imaginary
         self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
 
+    def __repr__(self):
+        return f"{self.real}+{self.imaginary}i"
+
+    def __lt__(self, other):
+        return self.absValue < other.absValue
+
     def __truediv__(self, other):
         numerator = self*Complex(other.real, -1*other.imaginary)
         denominator = (other.real ** 2) + (other.imaginary ** 2)
@@ -72,5 +79,3 @@ class Complex:
         rev_real = r*math.cos(math.radians(x)) 
         rev_imaginary = r*math.sin(math.radians(x))
         return Complex(rev_real, rev_imaginary)
-
-# root, pow
