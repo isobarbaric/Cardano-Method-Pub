@@ -75,5 +75,3 @@ class Complex:
         rev_real = r*math.cos(math.radians(x)) 
         rev_imaginary = r*math.sin(math.radians(x))
         return Complex(rev_real, rev_imaginary)
-
-# root, pow
