@@ -41,10 +41,8 @@ coeff.reverse()
 
 coeff, H, G, shift = depressed_cubic(coeff)
 
-print(coeff)
 
 answers = cardano_method(H, G, shift)
-
 
 start_date = date(2021, 11, 26)
 end_date = date.today()
