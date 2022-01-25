@@ -10,7 +10,7 @@ root.title('Cardano\'s Method')
 input_field = Entry(root)
 input_field.pack() 
 
-label_rn = Label(root, text="Enter the cubic polynomial's coefficients in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n")
+label_rn = Label(root, text="Enter the cubic polynomial's coefficients (all coefficients must be real) in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n")
 label_rn.pack()
 
 response = Label(root, text='Waiting for input...press submit once ready')
@@ -35,11 +35,14 @@ submit_button.pack()
 
 root.mainloop()
 
-# real coefficients only 
-
 coeff, H, G, shift = depressed_cubic(coeff)
 
 answers = cardano_method(H, G, shift)
 
-for root in answers:
-    print(root)
+root = Tk()
+root.title('Cardano\'s Method')
+
+display_roots = Label(root, text=f"The roots of the given polynomial are {', '.join(str(root) for root in answers)}.")
+display_roots.pack()
+
+root.mainloop()

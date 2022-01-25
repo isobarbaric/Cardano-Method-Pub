@@ -43,6 +43,9 @@ class Complex:
             self.imaginary = imaginary
         self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
 
+    def __repr__(self):
+        return f"{self.real}+{self.imaginary}i"
+
     def __lt__(self, other):
         return self.absValue < other.absValue
 
