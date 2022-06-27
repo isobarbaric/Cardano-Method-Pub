@@ -10,8 +10,6 @@ class CubicEquation:
         # assigning a copy of the cofficients to an attribute variable
         self.equation = coeff.copy()
 
-        print(self.equation)
-
         # reversing the list of coefficients, and assigning a copy of that list to an attribute variable
         coeff.reverse()
         self.coefficients = coeff.copy()
@@ -20,7 +18,7 @@ class CubicEquation:
         self.H, self.G, self.shift = -1, -1, -1
         self.answers = []
 
-    def __depressed_cubic(self):
+    def __depressedCubic(self):
         # determining the shift variable 
         shift = self.coefficients[2]/(3*self.coefficients[3])
 
@@ -45,7 +43,7 @@ class CubicEquation:
 
         return [(-1*b+(b*b-4*a*c).root())/(2*a), (-1*b-(b*b-4*a*c).root())/(2*a)]
 
-    def __cardano_method(self):
+    def __cardanoMethod(self):
         # finding u, v from Cardano's Method using a call to the static quadratic method
         u, v = CubicEquation.quadratic(Complex(1), Complex(self.G), Complex(-(self.H ** 3))) 
 
@@ -55,11 +53,11 @@ class CubicEquation:
         # determining the second partial root
         second = Complex(-self.H)/u.root(3)
 
-        # getting the values of the two constants omega and omega_sq
-        omega, omega_sq = [round(i) for i in CubicEquation.quadratic(Complex(1), Complex(1), Complex(1))]
+        # getting the values of the two constants omega and omegaSq
+        omega, omegaSq = [round(i) for i in CubicEquation.quadratic(Complex(1), Complex(1), Complex(1))]
 
         # determining the roots using the constants determined
-        withoutShift = [first+second, omega*first+omega_sq*second, omega_sq*first+omega*second]
+        withoutShift = [first+second, omega*first+omegaSq*second, omegaSq*first+omega*second]
        
         # using list-comprehension to perform the necessary shift
         answers = [round(i-Complex(self.shift)) for i in withoutShift]
@@ -68,27 +66,31 @@ class CubicEquation:
 
     def solve(self):
         # depressing the given cubic equation
-        self.__depressed_cubic()
+        self.__depressedCubic()
 
         # using Cardano's method to get the roots of the cubic equation
-        self.answers = self.__cardano_method()
+        self.answers = self.__cardanoMethod()
 
         return self.answers.copy()
 
     def __repr__(self):
-        print(self.equation)
         info = ""
+
+        # adding the coefficient of the x^3 term to the representation
         if (self.equation[0] != 1):
             info += str(self.equation[0])
         info += "x^3 + "
+
+        # adding the coefficient of the x^2 term to the representation
         if (self.equation[1] != 1):
             info += str(self.equation[1])
         info += "x^2 + "
+
+        # adding the coefficient of the x term to the representation
         if (self.equation[2] != 1):
             info += str(self.equation[2])
-        info += "x + " + str(self.equation[3])
-        return info 
 
-a = CubicEquation([3, 2, 3, 1])
-print(a)
-print(a.solve())
+        # adding the coefficient of the constant term to the representation
+        info += "x + " + str(self.equation[3])
+
+        return info 

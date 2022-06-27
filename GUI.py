@@ -30,7 +30,7 @@ class GUI:
         coefficients = []
 
         # a method to deal with the action when the user pushes the submit button
-        def when_clicked():
+        def whenClicked():
             nonlocal coefficients
 
             try:
@@ -45,7 +45,7 @@ class GUI:
                 return
 
         # adding a submit button to the window to allow the user to 'submit' their input
-        submitButton = Button(root, text="Submit Coefficients", command=when_clicked)
+        submitButton = Button(root, text="Submit Coefficients", command=whenClicked)
         submitButton.pack()
 
         # running the main loop for the GUI object

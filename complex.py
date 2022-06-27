@@ -23,23 +23,23 @@ class Complex:
 
     def __add__(self, other):
         # determining the real part of the new complex number
-        real_part = self.real + other.real
+        realPart = self.real + other.real
         
         # determining the imaginary part of the new complex number
-        imaginary_part = self.imaginary + other.imaginary 
+        imaginaryPart = self.imaginary + other.imaginary 
 
-        return Complex(real_part, imaginary_part)
+        return Complex(realPart, imaginaryPart)
    
     # supporting the subtraction operation
 
     def __sub__(self, other):
         # determining the real part of the new complex number
-        real_part = self.real - other.real
+        realPart = self.real - other.real
         
         # determining the imaginary part of the new complex number
-        imaginary_part = self.imaginary - other.imaginary 
+        imaginaryPart = self.imaginary - other.imaginary 
         
-        return Complex(real_part, imaginary_part)
+        return Complex(realPart, imaginaryPart)
 
     # supporting the multiplication operation (Complex * something)
 
@@ -52,12 +52,12 @@ class Complex:
             # multiplying a complex number with another complex number
 
             # determining the real part of the new complex number
-            real_part = self.real*other.real - self.imaginary*other.imaginary
+            realPart = self.real*other.real - self.imaginary*other.imaginary
 
             # determining the imaginary part of the new complex number
-            imaginary_part = self.real*other.imaginary + self.imaginary*other.real
+            imaginaryPart = self.real*other.imaginary + self.imaginary*other.real
 
-            return Complex(real_part, imaginary_part)
+            return Complex(realPart, imaginaryPart)
    
     # cont. supporting multiplication operation (something * Complex)
 
@@ -69,12 +69,12 @@ class Complex:
 
     def __truediv__(self, other):
         # determining the numerator of the new complex number
-        numerator = self*complex(other.real, -1*other.imaginary)
+        numerator = self*Complex(other.real, -1*other.imaginary)
 
         # determining the denominator of the new complex number
         denominator = (other.real ** 2) + (other.imaginary ** 2)
 
-        return complex(numerator.real/denominator, numerator.imaginary/denominator)
+        return Complex(numerator.real/denominator, numerator.imaginary/denominator)
 
     # supporting exponentation
 
@@ -98,14 +98,14 @@ class Complex:
 
     # math behavior methods
 
-    def __round__(self, num_digits=6):
-        # determining the rounded real_part of the complex number
-        rev_real = round(self.real, num_digits)
+    def __round__(self, numDigits=6):
+        # determining the rounded real part of the complex number
+        revReal = round(self.real, numDigits)
 
-        # determining the rounded imaginary_pary of the complex number
-        rev_imaginary = round(self.imaginary, num_digits)
+        # determining the rounded imaginary pary of the complex number
+        revImaginary = round(self.imaginary, numDigits)
 
-        return Complex(rev_real, rev_imaginary)
+        return Complex(revReal, revImaginary)
 
     def root(self, value=2.0):
         # using DeMoivre's Theorem to compute the 'value-th' root of the Complex number
@@ -123,10 +123,10 @@ class Complex:
         r = k**(1/float(value)) 
 
         # determining the real and imaginary parts of the root
-        rev_real = r*math.cos(math.radians(x)) 
-        rev_imaginary = r*math.sin(math.radians(x))
+        revReal = r*math.cos(math.radians(x)) 
+        revImaginary = r*math.sin(math.radians(x))
 
-        return Complex(rev_real, rev_imaginary)
+        return Complex(revReal, revImaginary)
     
     # class behavior methods
     
