@@ -1,48 +1,7 @@
+from GUI import GUI
 
-from tkinter import *
-from depress_cubic import *
-from complex import *
-from cardano import *
+# creating a new GUI object
+a = GUI()
 
-root = Tk() 
-root.title('Cardano\'s Method')
-
-input_field = Entry(root)
-input_field.pack() 
-
-label_rn = Label(root, text="Enter the cubic polynomial's coefficients (all coefficients must be real) in order of increasing degree separated by spaces. Any vanishing terms should be included with the coefficient zero.\n")
-label_rn.pack()
-
-response = Label(root, text='Waiting for input...press submit once ready')
-response.pack()
-
-num_attempts = 0
-coeff = []
-
-def when_clicked():
-    global num_attempts, coeff
-    try:
-        # list indices 'i' map directly to a_i notation 
-        coeff = [int(i) for i in input_field.get().split()]
-        response.config(text = "Input processed succesfully...please standby")
-        root.destroy()
-    except ValueError:
-        num_attempts += 1
-        response.config(text = f"Invalid input, please correct input format and press submit again. Number of invalid attempts: {num_attempts}")    
-
-submit_button = Button(root, text="Submit coefficients", command=when_clicked)
-submit_button.pack()
-
-root.mainloop()
-
-coeff, H, G, shift = depressed_cubic(coeff)
-
-answers = cardano_method(H, G, shift)
-
-root = Tk()
-root.title('Cardano\'s Method')
-
-display_roots = Label(root, text=f"The roots of the given polynomial are {', '.join(str(root) for root in answers)}.")
-display_roots.pack()
-
-root.mainloop()
+# loading the GUI to interact with the user 
+a.load()

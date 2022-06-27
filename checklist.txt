@@ -5,6 +5,10 @@ ideas:
 - testing with generated data? (not all cubics seem to be working flawlessly atm)
 pip install cardano-solver? idk
 
+- variable names
+- documentation
+- publish
+
 done list
 =========
 - make round function more friendly by overloading the one in the math module (to make syntax better)

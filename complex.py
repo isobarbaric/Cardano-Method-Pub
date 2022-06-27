@@ -3,78 +3,176 @@ import math
 
 class Complex:
 
-    def __mul__(self, other):
-        if isinstance(other, (int, float)):
-            return Complex(self.real*other, self.imaginary*other)
-        else:
-            real_part = self.real*other.real - self.imaginary*other.imaginary
-            imaginary_part = self.real*other.imaginary + self.imaginary*other.real
-            return Complex(real_part, imaginary_part)
-    
-    def __rmul__(self, other): 
-        # one integer*Complex numbers will come to here since all other cases are dealt with by the __mul__ function
-        return self.__mul__(other)
-
-    def __pow__(self, number): # number > 0 
-        if (number == 0):
-            return Complex(1, 0)
-        else:
-            currentNumber = self
-            for i in range(number-1):
-                currentNumber *= self
-                # currentNumber = self * currentNumber
-        return currentNumber
-
-    def __add__(self, other):
-        real_part = self.real + other.real
-        imaginary_part = self.imaginary + other.imaginary 
-        return Complex(real_part, imaginary_part)
-    
-    def __sub__(self, other):
-        real_part = self.real - other.real
-        imaginary_part = self.imaginary - other.imaginary 
-        return Complex(real_part, imaginary_part)
+    # constructor
 
     def __init__(self, real, imaginary=None):
+        # assigning the real part of this complex number to a relevant parameter
         self.real = real
+
         if imaginary is None:
+            # if the parameter for an imaginary number is not provided, then a default value is set
             self.imaginary = 0
         else:
+            # if the parameter is given, however, it is to be set accordingly
             self.imaginary = imaginary
-        self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
 
-    def __repr__(self):
-        return f"{self.real}+{self.imaginary}i"
+        # finding the magnitude of this complex number
+        self.absValue = math.sqrt((self.real ** 2) + (self.imaginary ** 2))
+    
+    # supporting the addition operation
+
+    def __add__(self, other):
+        # determining the real part of the new complex number
+        real_part = self.real + other.real
+        
+        # determining the imaginary part of the new complex number
+        imaginary_part = self.imaginary + other.imaginary 
+
+        return Complex(real_part, imaginary_part)
+   
+    # supporting the subtraction operation
+
+    def __sub__(self, other):
+        # determining the real part of the new complex number
+        real_part = self.real - other.real
+        
+        # determining the imaginary part of the new complex number
+        imaginary_part = self.imaginary - other.imaginary 
+        
+        return Complex(real_part, imaginary_part)
+
+    # supporting the multiplication operation (Complex * something)
+
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            # multiplying a complex number with a numerical number (integer or float)
+
+            return Complex(self.real*other, self.imaginary*other)
+        else:
+            # multiplying a complex number with another complex number
+
+            # determining the real part of the new complex number
+            real_part = self.real*other.real - self.imaginary*other.imaginary
+
+            # determining the imaginary part of the new complex number
+            imaginary_part = self.real*other.imaginary + self.imaginary*other.real
+
+            return Complex(real_part, imaginary_part)
+   
+    # cont. supporting multiplication operation (something * Complex)
+
+    def __rmul__(self, other): 
+        # calling the other multiplication method to allow multiplication
+        return self.__mul__(other)
+
+    # supporting the division operation
+
+    def __truediv__(self, other):
+        # determining the numerator of the new complex number
+        numerator = self*complex(other.real, -1*other.imaginary)
+
+        # determining the denominator of the new complex number
+        denominator = (other.real ** 2) + (other.imaginary ** 2)
+
+        return complex(numerator.real/denominator, numerator.imaginary/denominator)
+
+    # supporting exponentation
+
+    def __pow__(self, number): # pre-condition number >= 0 
+        if number < 0:
+            # returning none if the pre-condition is not met
+            return None
+        
+        if (number == 0):
+            # if the exponent is zero, then return the integer 1
+            return Complex(1, 0)
+        else:
+            # if the exponent is non-zero and > 0, perform exponentiation
+            currentNumber = self
+
+            # looping number of times necessary for multiplication
+            for _ in range(number-1):
+                currentNumber *= self
+
+            return currentNumber
+
+    # math behavior methods
+
+    def __round__(self, num_digits=6):
+        # determining the rounded real_part of the complex number
+        rev_real = round(self.real, num_digits)
+
+        # determining the rounded imaginary_pary of the complex number
+        rev_imaginary = round(self.imaginary, num_digits)
+
+        return Complex(rev_real, rev_imaginary)
+
+    def root(self, value=2.0):
+        # using DeMoivre's Theorem to compute the 'value-th' root of the Complex number
+    
+        # determining a 'k' value as sin x = a/k, cos x = b/k
+        k = self.absValue  
+       
+        # determining the angle associated with the complex number
+        x = math.degrees(math.acos(self.real/k))
+
+        # since square rots is basically having the angle 
+        x /= value 
+
+        # to get the cube root of the magnitude of the Complex number 
+        r = k**(1/float(value)) 
+
+        # determining the real and imaginary parts of the root
+        rev_real = r*math.cos(math.radians(x)) 
+        rev_imaginary = r*math.sin(math.radians(x))
+
+        return Complex(rev_real, rev_imaginary)
+    
+    # class behavior methods
+    
+    # supporting the less than operator
 
     def __lt__(self, other):
         return self.absValue < other.absValue
 
-    def __truediv__(self, other):
-        numerator = self*Complex(other.real, -1*other.imaginary)
-        denominator = (other.real ** 2) + (other.imaginary ** 2)
-        return Complex(numerator.real/denominator, numerator.imaginary/denominator)
+    # supporting the less than or equal to operator
+    
+    def __le__(self, other):
+        return self.absValue <= other.absValue
 
-    def __str__(self):
+    # supporting the greater than operator
+
+    def __gt__(self, other):
+        return self.absValue > other.absValue
+
+    # supporting the greater than or equal to operator
+    
+    def __ge__(self, other):
+        return self.absValue >= other.absValue
+
+    # supporting the equal to operator
+
+    def __eq__(self, other):
+        if self.real != other.real:
+            # if the real parts are not equal, then both of the numbers cannot be equal
+            return False 
+
+        if self.imaginary != other.imaginary:
+            # if the imaginary parts are not equal, then both of the numbers cannot be equal
+            return False
+        
+        return True
+
+    def __repr__(self):
+        # if the imaginary part is zero, then return just the real part of the number
         if self.imaginary == 0:
             return str(self.real)
+
+        # declaring a variable to keep track of the sign to be placed between the real and imaginary
         sign = '+'
+
+        # if the number is negative, then this sign has to be a minus instead of a plus
         if (self.imaginary < 0):
             sign = '-'
-        return ("{}" + sign + "{}i").format(self.real, abs(self.imaginary))
-        
-    def __round__(self, num_digits=4):
-        rev_real = round(self.real, num_digits)
-        rev_imaginary = round(self.imaginary, num_digits)
-        return Complex(rev_real, rev_imaginary)
 
-    def root(self, value=2.0):
-        k = self.absValue  # sin x = a/k, cos x = b/k
-        x = math.degrees(math.acos(self.real/k))
-        # assertions to ensure that the correct number has been identified (assertions messing everything up)
-        # assert math.isclose(math.cos(math.radians(x)), self.real/k)
-        # assert math.isclose(math.sin(math.radians(x)), self.imaginary/k)
-        x /= value # since square rots is basically having the angle 
-        r = k**(1/float(value)) # to get the cube root of the magnitude of the Complex number 
-        rev_real = r*math.cos(math.radians(x)) 
-        rev_imaginary = r*math.sin(math.radians(x))
-        return Complex(rev_real, rev_imaginary)
+        return ("{}" + sign + "{}i").format(self.real, abs(self.imaginary))
